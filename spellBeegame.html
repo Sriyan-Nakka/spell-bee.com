@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Sai Sriyan" />
+    <meta
+      name="description"
+      content="This is a spell bee game where you have to spell words from the audio"
+    />
+    <link
+      rel="icon"
+      href="https://res.cloudinary.com/dxcywxeqq/image/upload/v1715439511/bee_aauczf.png"
+    />
+    <title>Spell Bee Game</title>
+    <style>
+      @font-face {
+        font-family: "headFont";
+        src: url("https://res.cloudinary.com/dxcywxeqq/raw/upload/v1715329407/PoetsenOne-Regular_fcqr3y.ttf");
+      }
+      @font-face {
+        font-family: "bodyFont";
+        src: url("https://res.cloudinary.com/dxcywxeqq/raw/upload/v1715329649/Ubuntu-Regular_s1ohsb.ttf");
+      }
+      body {
+        text-align: center;
+        font-size: 150%;
+        font-family: bodyFont, sans-serif;
+        background-image: url("https://images.pexels.com/photos/2263410/pexels-photo-2263410.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+        background-attachment: fixed;
+        background-position: center;
+        background-size: cover;
+      }
+      h1 {
+        text-decoration: underline;
+        color: rgb(38, 121, 93);
+      }
+      #audio1,
+      #audio2,
+      #audio3,
+      #audio4,
+      #audio5,
+      #audio6,
+      #audio7,
+      #audio8,
+      #audio9,
+      #audio10,
+      #audio11,
+      #audio12,
+      #audio13,
+      #audio14,
+      #audio15,
+      #audio16,
+      #audio17,
+      #audioAlphabet,
+      #chooseMode,
+      #gamePlayContainer,
+      #next1,
+      #won,
+      #next2,
+      #next3,
+      #check2,
+      #check3,
+      #check4 {
+        display: none;
+      }
+      button {
+        font-size: 105%;
+        background-color: rgb(247, 246, 187);
+      }
+      button:hover {
+        cursor: pointer;
+        color: white;
+        background-color: darkolivegreen;
+      }
+      #difficulity,
+      #difficulityName {
+        font-weight: bolder;
+        text-decoration: underline;
+        text-align: center;
+        color: rgb(253, 0, 0);
+        background-color: rgba(173, 255, 47, 0.7);
+      }
+      #winText {
+        text-align: center;
+        font-weight: bold;
+        text-decoration: underline;
+        color: green;
+        font-size: 150%;
+      }
+      .gameContainer {
+        background-color: rgba(252, 220, 42, 0.7);
+      }
+      footer {
+        color: rgb(192, 255, 5);
+        background-color: rgba(17, 66, 50, 0.7);
+      }
+      #gamePlayContainer {
+        text-align: left;
+        background-color: rgba(173, 255, 47, 0.7);
+      }
+      input {
+        font-size: 1em;
+      }
+      .modeDiv {
+        font-size: 150%;
+      }
+      h1,
+      #winText,
+      header,
+      summary {
+        font-family: headFont, sans-serif;
+      }
+      summary {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="gameContainer">
+      <header><h1>🐝Spell Bee🐝</h1></header>
+
+      <details>
+        <summary>How To Play</summary>
+        You can choose a difficulity easy, normal and insane mode. <br />
+        <br />
+        When you choose easy or insane mode, you have to spell only one word
+        from their audio. In normal mod you have to spell four words from their
+        audio. <br />
+        <br />
+        When you spell them all, you win! <br />
+        Good Luck!
+      </details>
+      <br />
+      <div id="chooseMode">
+        <label>Choose your Mode to play:</label>
+        <!-- modes -->
+        <br />
+        <br />
+        <button id="normalModeButton">
+          <img
+            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewBox='0 0 256 256'%3E%3Cpath fill='black' d='M234.49 111.07L90.41 22.94A20 20 0 0 0 60 39.87v176.26a20 20 0 0 0 30.41 16.93l144.08-88.13a19.82 19.82 0 0 0 0-33.86M84 208.85V47.15L216.16 128Z'/%3E%3C/svg%3E"
+            alt="play button"
+          />
+          Normal
+        </button>
+        <button id="insaneModeButton">
+          <img
+            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewBox='0 0 256 256'%3E%3Cpath fill='black' d='M234.49 111.07L90.41 22.94A20 20 0 0 0 60 39.87v176.26a20 20 0 0 0 30.41 16.93l144.08-88.13a19.82 19.82 0 0 0 0-33.86M84 208.85V47.15L216.16 128Z'/%3E%3C/svg%3E"
+            alt="play button"
+          />
+          Insane
+        </button>
+        <br />
+        <button id="easyModeButton">
+          <img
+            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewBox='0 0 256 256'%3E%3Cpath fill='black' d='M234.49 111.07L90.41 22.94A20 20 0 0 0 60 39.87v176.26a20 20 0 0 0 30.41 16.93l144.08-88.13a19.82 19.82 0 0 0 0-33.86M84 208.85V47.15L216.16 128Z'/%3E%3C/svg%3E"
+            alt="play button"
+          />
+          Easy
+        </button>
+      </div>
+      <div id="gamePlayContainer">
+        <div class="modeDiv">
+          <p id="difficulity"><span id="difficulityName"></span> Mode</p>
+        </div>
+        You have to spell
+        <span id="wordAudio"></span>
+        <br />
+        <div id="audios">
+          <span id="audio1">
+            <audio
+              controls
+              src="https://res.cloudinary.com/dxcywxeqq/video/upload/v1715253500/oval_zcubxo.mp3"
+            ></audio>
+          </span>
+          <span id="audio2">
+            <audio
+              controls
+              src="https://res.cloudinary.com/dxcywxeqq/video/upload/v1715253523/exceed_spfuyg.mp3"
+            ></audio>
+          </span>
+          <span id="audio3">
+            <audio
+              controls
+              src="https://res.cloudinary.com/dxcywxeqq/video/upload/v1715253537/battalion_pwlnoh.mp3"
+            ></audio>
+          </span>
+          <span id="audio4">
+            <audio
+              controls
+              src="https://res.cloudinary.com/dxcywxeqq/video/upload/v1715253546/stun_zupsz9.mp3"
+            ></audio>
+          </span>
+          <span id="audio5">
+            <audio
+              controls
+              src="https://res.cloudinary.com/dxcywxeqq/video/upload/v1715268360/stay_b6odv0.mp3"
+            ></audio>
+          </span>
+          <span id="audio6">
+            <audio
+              controls
+              src="https://res.cloudinary.com/dxcywxeqq/video/upload/v1715268373/actor_ssz12a.mp3"
+            ></audio>
+          </span>
+          <span id="audio7">
+            <audio
+              controls
+              src="https://res.cloudinary.com/dxcywxeqq/video/upload/v1715268391/forget_h7yj4k.mp3"
+            ></audio>
+          </span>
+          <span id="audio8">
+            <audio
+              controls
+              src="https://res.cloudinary.com/dxcywxeqq/video/upload/v1715268404/write_tspyjv.mp3"
+            ></audio>
+          </span>
+          <span id="audio9">
+            <audio
+              controls
+              src="https://res.cloudinary.com/dxcywxeqq/video/upload/v1715328601/black_ncihdh.mp3"
+            ></audio>
+          </span>
+          <span id="audio10">
+            <audio
+              controls
+              src="https://res.cloudinary.com/dxcywxeqq/video/upload/v1715328617/doorway_dhdeie.mp3"
+            ></audio>
+          </span>
+          <span id="audio11">
+            <audio
+              controls
+              src="https://res.cloudinary.com/dxcywxeqq/video/upload/v1715328632/lukewarm_l7csld.mp3"
+            ></audio>
+          </span>
+          <span id="audio12">
+            <audio
+              controls
+              src="https://res.cloudinary.com/dxcywxeqq/video/upload/v1715328645/crocodile_d8hmqn.mp3"
+            ></audio>
+          </span>
+          <span id="audio13">
+            <audio
+              controls
+              src="https://res.cloudinary.com/dxcywxeqq/video/upload/v1715329056/inhabit_xjjm6b.mp3"
+            ></audio>
+          </span>
+          <span id="audio14">
+            <audio
+              controls
+              src="https://res.cloudinary.com/dxcywxeqq/video/upload/v1715329076/politician_haiojj.mp3"
+            ></audio>
+          </span>
+          <span id="audio15">
+            <audio
+              controls
+              src="https://res.cloudinary.com/dxcywxeqq/video/upload/v1715329088/fly_ar2plc.mp3"
+            ></audio>
+          </span>
+          <span id="audio16">
+            <audio
+              controls
+              src="https://res.cloudinary.com/dxcywxeqq/video/upload/v1715329103/quill_qigjt3.mp3"
+            ></audio>
+          </span>
+          <span id="audio17">
+            <audio
+              controls
+              src="https://res.cloudinary.com/dxcywxeqq/video/upload/v1715001211/insaneWord_bjtm8l.mp3"
+            ></audio>
+          </span>
+          <span id="audioAlphabet">
+            <audio
+              controls
+              src="https://res.cloudinary.com/dxcywxeqq/video/upload/v1715330514/allAlphabet_uoezaq.mp3"
+            ></audio>
+          </span>
+        </div>
+
+        <input type="text" id="guessedWord" /> <br />
+        <br />
+        <!-- check buttons -->
+        <button id="check1">Check</button>
+        <button id="check2">Check</button>
+        <button id="check3">Check</button>
+        <button id="check4">Check</button>
+        <!-- next buttons -->
+        <button id="next1">Next</button>
+        <button id="next2">Next</button>
+        <button id="next3">Next</button>
+        <p id="checker"></p>
+      </div>
+      <div id="won">
+        <p id="winText">You Win!</p>
+        <button id="playAgain">Play Again</button>
+      </div>
+      <br />
+      <footer>
+        &copy;Sai Sriyan Nakka, <br />
+        Version 1.3
+      </footer>
+    </div>
+    <script>
+      //section1
+      let audio1 = document.getElementById("audio1");
+      let audio2 = document.getElementById("audio2");
+      let audio3 = document.getElementById("audio3");
+      let audio4 = document.getElementById("audio4");
+      //section2
+      let audio5 = document.getElementById("audio5");
+      let audio6 = document.getElementById("audio6");
+      let audio7 = document.getElementById("audio7");
+      let audio8 = document.getElementById("audio8");
+      //section3
+      let audio9 = document.getElementById("audio9");
+      let audio10 = document.getElementById("audio10");
+      let audio11 = document.getElementById("audio11");
+      let audio12 = document.getElementById("audio12");
+      //section4
+      let audio13 = document.getElementById("audio13");
+      let audio14 = document.getElementById("audio14");
+      let audio15 = document.getElementById("audio15");
+      let audio16 = document.getElementById("audio16");
+      //insaneWord
+      let audio17 = document.getElementById("audio17");
+      //easyWord
+      let audioAlphabet = document.getElementById("audioAlphabet");
+
+      // words
+      const word1 = "oval";
+      const word2 = "exceed";
+      const word3 = "battalion";
+      const word4 = "stun";
+      const word5 = "stay";
+      const word6 = "actor";
+      const word7 = "forget";
+      const word8 = "write";
+      const word9 = "black";
+      const word10 = "doorway";
+      const word11 = "lukewarm";
+      const word12 = "crocodile";
+      const word13 = "inhabit";
+      const word14 = "politician";
+      const word15 = "fly";
+      const word16 = "quill";
+      const word17 = "pneumonoultramicroscopicsilicovolcanoconiosis";
+      const wordAlphabet = "abcdefghijklmnopqrstuvwxyz";
+
+      const wordOrder = [
+        [word1, word2, word3, word4],
+        [word5, word6, word7, word8],
+        [word9, word10, word11, word12],
+        [word13, word14, word15, word16],
+      ];
+
+      let chooseMode = document.getElementById("chooseMode");
+      let normalModeButton = document.getElementById("normalModeButton");
+      let insaneModeButton = document.getElementById("insaneModeButton");
+      let easyModeButton = document.getElementById("easyModeButton");
+      let playAgain = document.getElementById("playAgain");
+
+      let gamePlayContainer = document.getElementById("gamePlayContainer");
+      let wordAudio = document.getElementById("wordAudio");
+      let difficulityName = document.getElementById("difficulityName");
+      let winText = document.getElementById("winText");
+      let won = document.getElementById("won");
+      let guessedWord;
+
+      let check1 = document.getElementById("check1");
+      let check2 = document.getElementById("check2");
+      let check3 = document.getElementById("check3");
+      let check4 = document.getElementById("check4");
+      let next1 = document.getElementById("next1");
+      let next2 = document.getElementById("next2");
+      let next3 = document.getElementById("next3");
+      let block;
+
+      //gameplay function
+
+      chooseMode.style.display = "block";
+
+      insaneModeButton.onclick = function () {
+        chooseMode.style.display = "none";
+        check1.style.display = "block";
+        gamePlayContainer.style.display = "block";
+        difficulityName.innerHTML = "Insane";
+        audio17.style.display = "block";
+        guessedWord = document.getElementById("guessedWord");
+        check1.onclick = function () {
+          if (guessedWord.value === word17) {
+            checker.textContent = "You are correct!";
+            setTimeout(function () {
+              checker.textContent = "";
+              won.style.display = "block";
+              check1.style.display = "none";
+              gamePlayContainer.style.display = "none";
+            }, 1500);
+          } else {
+            checker.textContent = "You are wrong, try again.";
+            setTimeout(function () {
+              checker.textContent = "";
+            }, 1500);
+          }
+        };
+      };
+
+      easyModeButton.onclick = function () {
+        chooseMode.style.display = "none";
+        gamePlayContainer.style.display = "block";
+        difficulityName.innerHTML = "Easy";
+        audioAlphabet.style.display = "block";
+        check1.style.display = "block";
+        guessedWord = document.getElementById("guessedWord");
+        check1.onclick = function () {
+          if (guessedWord.value === wordAlphabet) {
+            checker.textContent = "You are correct!";
+            setTimeout(function () {
+              checker.textContent = "";
+              won.style.display = "block";
+              check1.style.display = "none";
+              gamePlayContainer.style.display = "none";
+            }, 1500);
+          } else {
+            checker.textContent = "You are wrong, try again.";
+            setTimeout(function () {
+              checker.textContent = "";
+            }, 1500);
+          }
+        };
+      };
+
+      normalModeButton.onclick = function () {
+        let randNum = Math.floor(Math.random() * 4) + 1;
+        console.log(randNum);
+        switch (randNum) {
+          case 1:
+            //word1
+            check1.style.display = "block";
+            chooseMode.style.display = "none";
+            gamePlayContainer.style.display = "block";
+            difficulityName.innerHTML = "Normal";
+            audio1.style.display = "block";
+            guessedWord = document.getElementById("guessedWord");
+            check1.onclick = function () {
+              if (guessedWord.value === word1) {
+                checker.textContent = "You are correct!";
+                setTimeout(function () {
+                  checker.textContent = "";
+                  next1.style.display = "block";
+                  check1.style.display = "none";
+                  guessedWord.value = "";
+                  audio1.style.display = "none";
+                }, 1500);
+              } else {
+                checker.textContent = "You are wrong, try again.";
+                setTimeout(function () {
+                  checker.textContent = "";
+                }, 1500);
+              }
+            };
+            //word2
+            next1.onclick = function () {
+              next1.style.display = "none";
+              check2.style.display = "block";
+              audio2.style.display = "block";
+              guessedWord = document.getElementById("guessedWord");
+              check2.onclick = function () {
+                if (guessedWord.value === word2) {
+                  checker.textContent = "You are correct!";
+                  setTimeout(function () {
+                    checker.textContent = "";
+                    next2.style.display = "block";
+                    check2.style.display = "none";
+                    guessedWord.value = "";
+                    audio2.style.display = "none";
+                  }, 1500);
+                } else {
+                  checker.textContent = "You are wrong, try again.";
+                  setTimeout(function () {
+                    checker.textContent = "";
+                  }, 1500);
+                }
+              };
+            };
+            //word3
+            next2.onclick = function () {
+              next2.style.display = "none";
+              check3.style.display = "block";
+              audio3.style.display = "block";
+              guessedWord = document.getElementById("guessedWord");
+              check3.onclick = function () {
+                if (guessedWord.value === word3) {
+                  checker.textContent = "You are correct!";
+                  setTimeout(function () {
+                    checker.textContent = "";
+                    next3.style.display = "block";
+                    check3.style.display = "none";
+                    guessedWord.value = "";
+                    audio3.style.display = "none";
+                  }, 1500);
+                } else {
+                  checker.textContent = "You are wrong, try again.";
+                  setTimeout(function () {
+                    checker.textContent = "";
+                  }, 1500);
+                }
+              };
+            };
+            //word4
+            next3.onclick = function () {
+              next3.style.display = "none";
+              audio4.style.display = "block";
+              check4.style.display = "block";
+              guessedWord = document.getElementById("guessedWord");
+              check4.onclick = function () {
+                if (guessedWord.value === word4) {
+                  checker.textContent = "You are correct!";
+                  setTimeout(function () {
+                    checker.textContent = "";
+                    check4.style.display = "none";
+                    guessedWord.value = "";
+                    audio4.style.display = "none";
+                    gamePlayContainer.style.display = "none";
+                    won.style.display = "block";
+                  }, 1500);
+                } else {
+                  checker.textContent = "You are wrong, try again.";
+                  setTimeout(function () {
+                    checker.textContent = "";
+                  }, 1500);
+                }
+              };
+            };
+            break;
+
+          case 2:
+            //word1
+            check1.style.display = "block";
+            chooseMode.style.display = "none";
+            gamePlayContainer.style.display = "block";
+            difficulityName.innerHTML = "Normal";
+            audio5.style.display = "block";
+            guessedWord = document.getElementById("guessedWord");
+            check1.onclick = function () {
+              if (guessedWord.value === word5) {
+                checker.textContent = "You are correct!";
+                setTimeout(function () {
+                  checker.textContent = "";
+                  next1.style.display = "block";
+                  check1.style.display = "none";
+                  guessedWord.value = "";
+                  audio5.style.display = "none";
+                }, 1500);
+              } else {
+                checker.textContent = "You are wrong, try again.";
+                setTimeout(function () {
+                  checker.textContent = "";
+                }, 1500);
+              }
+            };
+            //word2
+            next1.onclick = function () {
+              next1.style.display = "none";
+              check2.style.display = "block";
+              audio6.style.display = "block";
+              guessedWord = document.getElementById("guessedWord");
+              check2.onclick = function () {
+                if (guessedWord.value === word6) {
+                  checker.textContent = "You are correct!";
+                  setTimeout(function () {
+                    checker.textContent = "";
+                    next2.style.display = "block";
+                    check2.style.display = "none";
+                    guessedWord.value = "";
+                    audio6.style.display = "none";
+                  }, 1500);
+                } else {
+                  checker.textContent = "You are wrong, try again.";
+                  setTimeout(function () {
+                    checker.textContent = "";
+                  }, 1500);
+                }
+              };
+            };
+            //word3
+            next2.onclick = function () {
+              next2.style.display = "none";
+              check3.style.display = "block";
+              audio7.style.display = "block";
+              guessedWord = document.getElementById("guessedWord");
+              check3.onclick = function () {
+                if (guessedWord.value === word7) {
+                  checker.textContent = "You are correct!";
+                  setTimeout(function () {
+                    checker.textContent = "";
+                    next3.style.display = "block";
+                    check3.style.display = "none";
+                    guessedWord.value = "";
+                    audio7.style.display = "none";
+                  }, 1500);
+                } else {
+                  checker.textContent = "You are wrong, try again.";
+                  setTimeout(function () {
+                    checker.textContent = "";
+                  }, 1500);
+                }
+              };
+            };
+            //word4
+            next3.onclick = function () {
+              next3.style.display = "none";
+              audio8.style.display = "block";
+              check4.style.display = "block";
+              guessedWord = document.getElementById("guessedWord");
+              check4.onclick = function () {
+                if (guessedWord.value === word8) {
+                  checker.textContent = "You are correct!";
+                  setTimeout(function () {
+                    checker.textContent = "";
+                    check4.style.display = "none";
+                    guessedWord.value = "";
+                    audio8.style.display = "none";
+                    gamePlayContainer.style.display = "none";
+                    won.style.display = "block";
+                  }, 1500);
+                } else {
+                  checker.textContent = "You are wrong, try again.";
+                  setTimeout(function () {
+                    checker.textContent = "";
+                  }, 1500);
+                }
+              };
+            };
+            break;
+
+          case 3:
+            //word1
+            check1.style.display = "block";
+            chooseMode.style.display = "none";
+            gamePlayContainer.style.display = "block";
+            difficulityName.innerHTML = "Normal";
+            audio9.style.display = "block";
+            guessedWord = document.getElementById("guessedWord");
+            check1.onclick = function () {
+              if (guessedWord.value === word9) {
+                checker.textContent = "You are correct!";
+                setTimeout(function () {
+                  checker.textContent = "";
+                  next1.style.display = "block";
+                  check1.style.display = "none";
+                  guessedWord.value = "";
+                  audio9.style.display = "none";
+                }, 1500);
+              } else {
+                checker.textContent = "You are wrong, try again.";
+                setTimeout(function () {
+                  checker.textContent = "";
+                }, 1500);
+              }
+            };
+            //word2
+            next1.onclick = function () {
+              next1.style.display = "none";
+              check2.style.display = "block";
+              audio10.style.display = "block";
+              guessedWord = document.getElementById("guessedWord");
+              check2.onclick = function () {
+                if (guessedWord.value === word10) {
+                  checker.textContent = "You are correct!";
+                  setTimeout(function () {
+                    checker.textContent = "";
+                    next2.style.display = "block";
+                    check2.style.display = "none";
+                    guessedWord.value = "";
+                    audio10.style.display = "none";
+                  }, 1500);
+                } else {
+                  checker.textContent = "You are wrong, try again.";
+                  setTimeout(function () {
+                    checker.textContent = "";
+                  }, 1500);
+                }
+              };
+            };
+            //word3
+            next2.onclick = function () {
+              next2.style.display = "none";
+              check3.style.display = "block";
+              audio11.style.display = "block";
+              guessedWord = document.getElementById("guessedWord");
+              check3.onclick = function () {
+                if (guessedWord.value === word11) {
+                  checker.textContent = "You are correct!";
+                  setTimeout(function () {
+                    checker.textContent = "";
+                    next3.style.display = "block";
+                    check3.style.display = "none";
+                    guessedWord.value = "";
+                    audio11.style.display = "none";
+                  }, 1500);
+                } else {
+                  checker.textContent = "You are wrong, try again.";
+                  setTimeout(function () {
+                    checker.textContent = "";
+                  }, 1500);
+                }
+              };
+            };
+            //word4
+            next3.onclick = function () {
+              next3.style.display = "none";
+              audio12.style.display = "block";
+              check4.style.display = "block";
+              guessedWord = document.getElementById("guessedWord");
+              check4.onclick = function () {
+                if (guessedWord.value === word12) {
+                  checker.textContent = "You are correct!";
+                  setTimeout(function () {
+                    checker.textContent = "";
+                    check4.style.display = "none";
+                    guessedWord.value = "";
+                    audio12.style.display = "none";
+                    gamePlayContainer.style.display = "none";
+                    won.style.display = "block";
+                  }, 1500);
+                } else {
+                  checker.textContent = "You are wrong, try again.";
+                  setTimeout(function () {
+                    checker.textContent = "";
+                  }, 1500);
+                }
+              };
+            };
+            break;
+
+          case 4:
+            //word1
+            check1.style.display = "block";
+            chooseMode.style.display = "none";
+            gamePlayContainer.style.display = "block";
+            difficulityName.innerHTML = "Normal";
+            audio13.style.display = "block";
+            guessedWord = document.getElementById("guessedWord");
+            check1.onclick = function () {
+              if (guessedWord.value === word13) {
+                checker.textContent = "You are correct!";
+                setTimeout(function () {
+                  checker.textContent = "";
+                  next1.style.display = "block";
+                  check1.style.display = "none";
+                  guessedWord.value = "";
+                  audio13.style.display = "none";
+                }, 1500);
+              } else {
+                checker.textContent = "You are wrong, try again.";
+                setTimeout(function () {
+                  checker.textContent = "";
+                }, 1500);
+              }
+            };
+            //word2
+            next1.onclick = function () {
+              next1.style.display = "none";
+              check2.style.display = "block";
+              audio14.style.display = "block";
+              guessedWord = document.getElementById("guessedWord");
+              check2.onclick = function () {
+                if (guessedWord.value === word14) {
+                  checker.textContent = "You are correct!";
+                  setTimeout(function () {
+                    checker.textContent = "";
+                    next2.style.display = "block";
+                    check2.style.display = "none";
+                    guessedWord.value = "";
+                    audio14.style.display = "none";
+                  }, 1500);
+                } else {
+                  checker.textContent = "You are wrong, try again.";
+                  setTimeout(function () {
+                    checker.textContent = "";
+                  }, 1500);
+                }
+              };
+            };
+            //word3
+            next2.onclick = function () {
+              next2.style.display = "none";
+              check3.style.display = "block";
+              audio15.style.display = "block";
+              guessedWord = document.getElementById("guessedWord");
+              check3.onclick = function () {
+                if (guessedWord.value === word15) {
+                  checker.textContent = "You are correct!";
+                  setTimeout(function () {
+                    checker.textContent = "";
+                    next3.style.display = "block";
+                    check3.style.display = "none";
+                    guessedWord.value = "";
+                    audio15.style.display = "none";
+                  }, 1500);
+                } else {
+                  checker.textContent = "You are wrong, try again.";
+                  setTimeout(function () {
+                    checker.textContent = "";
+                  }, 1500);
+                }
+              };
+            };
+            //word4
+            next3.onclick = function () {
+              next3.style.display = "none";
+              audio16.style.display = "block";
+              check4.style.display = "block";
+              guessedWord = document.getElementById("guessedWord");
+              check4.onclick = function () {
+                if (guessedWord.value === word16) {
+                  checker.textContent = "You are correct!";
+                  setTimeout(function () {
+                    checker.textContent = "";
+                    check4.style.display = "none";
+                    guessedWord.value = "";
+                    audio16.style.display = "none";
+                    gamePlayContainer.style.display = "none";
+                    won.style.display = "block";
+                  }, 1500);
+                } else {
+                  checker.textContent = "You are wrong, try again.";
+                  setTimeout(function () {
+                    checker.textContent = "";
+                  }, 1500);
+                }
+              };
+            };
+            break;
+        }
+      };
+      playAgain.onclick = function () {
+        won.style.display = "none";
+        gamePlayContainer.style.display = "none";
+        chooseMode.style.display = "block";
+        checker.textContent = "";
+        guessedWord.value = "";
+        difficulityName.innerHTML = "";
+        audio17.style.display = "none";
+        audioAlphabet.style.display = "none";
+      };
+    </script>
+  </body>
+</html>
